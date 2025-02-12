@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { KortDataService } from './kort-data.service';
 import { DateService } from './date.service';  // DateService'i içe aktar
+import { ReservationService } from './reservation.service';
 
 interface Kort {
   kort: number;
@@ -25,7 +26,11 @@ export class KortService {
   allSlots$ = this.allSlots.asObservable();
   private rezervasyonlar: Rezervasyon[] = [];  // any[] yerine Rezervasyon arayüzü kullanıldı
 
-  constructor(private kortDataService: KortDataService, private dateService: DateService) {
+  constructor(
+    private kortDataService: KortDataService, 
+    private dateService: DateService,
+    private reservationService: ReservationService
+  ) {
     // DateService'e abone olundu
     this.dateService.selectedDate$.subscribe(selectedDate => {
       this.loadSlotsForDate(selectedDate);
@@ -113,6 +118,26 @@ export class KortService {
 
     // Tüm slotları birleştir ve güncelle
     this.allSlots.next([...updatedSlots, ...additionalSlots]);
+  }
+
+  // Yeni metod: Rezervasyon oluştur
+  async createReservation(kortId: number, startTime: string, duration: number) {
+    try {
+      const selectedDate = this.dateService.getSelectedDate();
+      await this.reservationService.createReservation({
+        courtId: kortId,
+        date: new Date(selectedDate),
+        startTime: startTime,
+        duration: duration,
+        playerName: 'Anonymous'  // veya data'dan gelen player name
+      });
+      
+      // Mevcut slot güncelleme mantığını kullan
+      this.loadSlotsForDate(selectedDate);
+    } catch (error) {
+      console.error('Rezervasyon oluşturma hatası:', error);
+      throw error;
+    }
   }
 
   // Bileşen yok edilirken tüm abonelikleri iptal et (isteğe bağlı, eğer varsa)

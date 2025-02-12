@@ -8,6 +8,7 @@ export interface Reservation {
   date: Date;
   startTime: string;
   duration: number;
+  playerName: string;
   createdAt: Date;
 }
 

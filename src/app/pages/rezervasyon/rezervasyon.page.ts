@@ -51,7 +51,8 @@ export class RezervasyonPage implements OnInit {
             courtId: result.data.courtId,
             date: new Date(this.selectedDate),
             startTime: startTime,
-            duration: result.data.duration
+            duration: result.data.duration,
+            playerName: result.data.player
           });
           await this.loadUserReservations(); // Rezervasyonları yeniden yükle
           this.kortService.loadSlotsForDate(this.selectedDate); // Kort durumunu güncelle

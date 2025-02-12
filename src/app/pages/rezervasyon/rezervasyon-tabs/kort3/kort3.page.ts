@@ -4,6 +4,7 @@ import { RezervasyonModalComponent } from 'src/app/pages/rezervasyon/rezervasyon
 import { KortService } from 'src/app/services/kort.service';
 import { DateService } from 'src/app/services/date.service';
 import { Subscription } from 'rxjs';
+import { ReservationService } from 'src/app/services/reservation.service';
 
 @Component({
   selector: 'app-kort3',
@@ -18,7 +19,8 @@ export class Kort3Page implements OnInit, OnDestroy {
   constructor(
     private modalController: ModalController,
     private kortService: KortService,
-    private dateService: DateService
+    private dateService: DateService,
+    private reservationService: ReservationService
   ) {}
 
   ngOnInit() {
@@ -33,7 +35,6 @@ export class Kort3Page implements OnInit, OnDestroy {
     const slotsSubscription = this.kortService.allSlots$.subscribe(slots => {
       const kort3Slots = slots.filter(slot => slot.kort === 3);
       const actualDate = this.selectedDate.split('T')[0];
-
       const allTimeSlots = this.generateTimeSlotsForDay(8, 22);
 
       const filteredSlots = allTimeSlots.map(time => {
@@ -86,20 +87,33 @@ export class Kort3Page implements OnInit, OnDestroy {
     }
   }
 
-  reserveSlot(time: string, data: { player: string; startTime: string; endTime: string; duration: number }) {
-    const updatedSlots = this.timeSlots.map(slot => {
-      if (slot.time === time) {
-        return {
-          ...slot,
-          isAvailable: false,
-          player: data.player
-        };
-      }
-      return slot;
-    });
+  async reserveSlot(time: string, data: { player: string; startTime: string; endTime: string; duration: number }) {
+    try {
+      await this.reservationService.createReservation({
+        courtId: 3,
+        date: new Date(this.selectedDate),
+        startTime: time,
+        duration: data.duration,
+        playerName: data.player
+      });
 
-    this.timeSlots = updatedSlots;
-    this.kortService.updateKortSlots(3, updatedSlots); // Kort numarası 3
+      const updatedSlots = this.timeSlots.map(slot => {
+        if (slot.time === time) {
+          return {
+            ...slot,
+            isAvailable: false,
+            player: data.player
+          };
+        }
+        return slot;
+      });
+
+      this.timeSlots = updatedSlots;
+      this.kortService.updateKortSlots(3, updatedSlots);
+      console.log('Rezervasyon başarıyla kaydedildi');
+    } catch (error) {
+      console.error('Rezervasyon hatası:', error);
+    }
   }
 
   ngOnDestroy() {

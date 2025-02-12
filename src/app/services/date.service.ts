@@ -5,11 +5,15 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class DateService {
-  private selectedDateSubject = new BehaviorSubject<string>(new Date().toISOString());
-  selectedDate$ = this.selectedDateSubject.asObservable();
+  private selectedDate = new BehaviorSubject<string>(new Date().toISOString());
+  selectedDate$ = this.selectedDate.asObservable();
 
   // Seçilen tarihi günceller
   setSelectedDate(date: string) {
-    this.selectedDateSubject.next(date);
+    this.selectedDate.next(date);
+  }
+
+  getSelectedDate(): string {
+    return this.selectedDate.value;
   }
 }

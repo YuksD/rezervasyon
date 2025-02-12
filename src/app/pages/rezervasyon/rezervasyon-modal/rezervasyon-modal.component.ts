@@ -10,6 +10,8 @@ export class RezervasyonModalComponent implements OnInit {
   @Input() startTime: string = '';  // Başlangıç saati
   @Input() endTime: string = '';    // Bitiş saati (ilk hesaplama için)
   @Input() selectedDate: string = ''; // Seçilen tarih
+  @Input() kortId: number = 0;
+  
   selectedDuration: number = 60;    // Varsayılan süre
   playerName: string = '';          // Oyuncu ismi
 
@@ -21,14 +23,11 @@ export class RezervasyonModalComponent implements OnInit {
 
   // Süre değiştiğinde bitiş saatini yeniden hesapla
   updateEndTime() {
-    const [startHour, startMinute] = this.startTime.split(':').map(Number);
-    const totalStartMinutes = startHour * 60 + startMinute;
-    const totalEndMinutes = totalStartMinutes + this.selectedDuration; // Güncelleme
-    const endHour = Math.floor(totalEndMinutes / 60) % 24; // 24 saat formatı
-    const endMinute = totalEndMinutes % 60;
-    const formattedEndHour = endHour.toString().padStart(2, '0');
-    const formattedEndMinute = endMinute.toString().padStart(2, '0');
-    this.endTime = `${formattedEndHour}:${formattedEndMinute}`;
+    const [hours, minutes] = this.startTime.split(':').map(Number);
+    const totalMinutes = hours * 60 + minutes + this.selectedDuration;
+    const endHours = Math.floor(totalMinutes / 60) % 24;
+    const endMinutes = totalMinutes % 60;
+    this.endTime = `${endHours.toString().padStart(2, '0')}:${endMinutes.toString().padStart(2, '0')}`;
   }
 
   // Süreyi butonlarla seç
@@ -42,11 +41,14 @@ export class RezervasyonModalComponent implements OnInit {
   }
 
   async reserve() {
+    if (!this.playerName) return; // Boş isim kontrolü
+
     await this.modalController.dismiss({
       player: this.playerName,
       startTime: this.startTime,
       endTime: this.endTime,
-      duration: this.selectedDuration
+      duration: this.selectedDuration,
+      courtId: this.kortId
     });
   }
 }

@@ -2,11 +2,23 @@ import { Component, OnInit, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
+import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { Auth } from '@angular/fire/auth';
+import { provideAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
+  standalone: true,
+  imports: [
+    IonicModule,
+    ReactiveFormsModule,
+    CommonModule,
+    RouterLink
+  ]
 })
 export class LoginPage implements OnInit {
 

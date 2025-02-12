@@ -13,11 +13,8 @@ export class AuthService {
 
   async login(email: string, password: string) {
     try {
-      const result = await signInWithEmailAndPassword(this.auth, email, password);
-      if (result.user) {
-        this.router.navigate(['/anasayfa']);
-      }
-      return result;
+      const userCredential = await signInWithEmailAndPassword(this.auth, email, password);
+      return userCredential;
     } catch (error) {
       console.error('Login error:', error);
       throw error;
@@ -26,11 +23,8 @@ export class AuthService {
 
   async register(email: string, password: string) {
     try {
-      const result = await createUserWithEmailAndPassword(this.auth, email, password);
-      if (result.user) {
-        this.router.navigate(['/anasayfa']);
-      }
-      return result;
+      const userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
+      return userCredential;
     } catch (error) {
       console.error('Register error:', error);
       throw error;

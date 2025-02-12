@@ -6,7 +6,7 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then(m => m.HomePageModule),
-    canActivate: [AuthGuard]
+    
   },
   {
     path: '',
@@ -35,7 +35,7 @@ const routes: Routes = [
   {
     path: 'anasayfa',
     loadChildren: () => import('./pages/anasayfa/anasayfa.module').then(m => m.AnasayfaPageModule),
-    canActivate: [AuthGuard]
+    //canActivate: [AuthGuard]
   },
   {
     path: 'rezervasyon',

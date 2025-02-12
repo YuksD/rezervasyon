@@ -4,6 +4,7 @@ import { RezervasyonModalComponent } from 'src/app/pages/rezervasyon/rezervasyon
 import { KortService } from 'src/app/services/kort.service';
 import { DateService } from 'src/app/services/date.service';
 import { Subscription } from 'rxjs';
+import { ReservationService } from 'src/app/services/reservation.service';
 
 @Component({
   selector: 'app-kort1',
@@ -18,7 +19,8 @@ export class Kort1Page implements OnInit {
   constructor(
     private modalController: ModalController,
     private kortService: KortService,
-    private dateService: DateService
+    private dateService: DateService,
+    private reservationService: ReservationService
   ) {}
 
   ngOnInit() {
@@ -100,23 +102,37 @@ export class Kort1Page implements OnInit {
   }
 
   // Slotu rezerve etme işlemi
-  reserveSlot(time: string, data: { player: string; startTime: string; endTime: string; duration: number }) {
-    const updatedSlots = this.timeSlots.map(slot => {
-      if (slot.time === time) {
-        return {
-          ...slot,
-          isAvailable: false, // Slot artık dolu
-          player: data.player // Oyuncu ismi ekleniyor
-        };
-      }
-      return slot;
-    });
+  async reserveSlot(time: string, data: { player: string; startTime: string; endTime: string; duration: number }) {
+    try {
+      await this.reservationService.createReservation({
+        courtId: 1,
+        date: new Date(this.selectedDate),
+        startTime: time,
+        duration: data.duration,
+        playerName: data.player
+      });
 
-    // Güncellenmiş slotları ayarla
-    this.timeSlots = updatedSlots;
+      // Mevcut slot güncelleme mantığı aynı kalsın
+      const updatedSlots = this.timeSlots.map(slot => {
+        if (slot.time === time) {
+          return {
+            ...slot,
+            isAvailable: false,
+            player: data.player
+          };
+        }
+        return slot;
+      });
 
-    // Kort bilgilerini KortService'e göndererek güncelle
-    this.kortService.updateKortSlots(1, updatedSlots); // Kort numarasını doğru girdiğinizden emin olun.
+      this.timeSlots = updatedSlots;
+      this.kortService.updateKortSlots(1, updatedSlots);
+      
+      // Rezervasyon başarılı mesajı gösterilebilir
+      console.log('Rezervasyon başarıyla kaydedildi');
+    } catch (error) {
+      console.error('Rezervasyon hatası:', error);
+      // Hata durumunda kullanıcıya bilgi verilebilir
+    }
   }
 
   // Bileşen yok edilirken tüm abonelikleri iptal et
