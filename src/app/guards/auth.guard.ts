@@ -6,10 +6,14 @@ import { Auth } from '@angular/fire/auth';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  constructor(private auth: Auth, private router: Router) {}
+  constructor(
+    private auth: Auth,
+    private router: Router
+  ) {}
 
   async canActivate(): Promise<boolean> {
     const user = await this.auth.currentUser;
+    
     if (user) {
       return true;
     } else {

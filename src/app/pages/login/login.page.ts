@@ -12,6 +12,8 @@ export class LoginPage implements OnInit {
 
   form!: FormGroup;
   isLogin = signal<boolean>(false);
+  errorMessage: string = '';
+  isLoading = signal<boolean>(false);
 
 
   constructor(
@@ -30,8 +32,12 @@ export class LoginPage implements OnInit {
 
   async onSubmit() {
     if(this.form.invalid) {
+      this.form.markAllAsTouched();
       return;
     }
+
+    this.isLoading.set(true);
+    this.errorMessage = '';
 
     try {
       await this.authService.login(
@@ -39,8 +45,11 @@ export class LoginPage implements OnInit {
         this.form.get('password')?.value
       );
       this.router.navigate(['/anasayfa']);
-    } catch (error) {
+    } catch (error: any) {
+      this.errorMessage = error.message || 'Giriş yapılırken bir hata oluştu';
       console.error('Login error:', error);
+    } finally {
+      this.isLoading.set(false);
     }
   }
 }

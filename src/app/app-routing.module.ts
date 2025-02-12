@@ -5,7 +5,8 @@ import { AuthGuard } from './guards/auth.guard';
 const routes: Routes = [
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
+    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: '',
@@ -14,15 +15,18 @@ const routes: Routes = [
   },
   {
     path: 'bir',
-    loadChildren: () => import('./bir-iki-uc/bir/bir.module').then(m => m.BirPageModule)
+    loadChildren: () => import('./bir-iki-uc/bir/bir.module').then(m => m.BirPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'iki',
-    loadChildren: () => import('./bir-iki-uc/iki/iki.module').then(m => m.IkiPageModule)
+    loadChildren: () => import('./bir-iki-uc/iki/iki.module').then(m => m.IkiPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'uc',
-    loadChildren: () => import('./bir-iki-uc/uc/uc.module').then(m => m.UcPageModule)
+    loadChildren: () => import('./bir-iki-uc/uc/uc.module').then(m => m.UcPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'giris',
@@ -30,7 +34,8 @@ const routes: Routes = [
   },
   {
     path: 'anasayfa',
-    loadChildren: () => import('./pages/anasayfa/anasayfa.module').then(m => m.AnasayfaPageModule)
+    loadChildren: () => import('./pages/anasayfa/anasayfa.module').then(m => m.AnasayfaPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'rezervasyon',
@@ -40,7 +45,8 @@ const routes: Routes = [
   },
   {
     path: 'profil',
-    loadChildren: () => import('./pages/profil/profil.module').then(m => m.ProfilPageModule)
+    loadChildren: () => import('./pages/profil/profil.module').then(m => m.ProfilPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'kayit',

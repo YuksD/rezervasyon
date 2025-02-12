@@ -14,7 +14,8 @@ import { ReservationService } from 'src/app/services/reservation.service';
 export class RezervasyonPage implements OnInit {
   selectedDate: string;
   selectedDay: string = 'today';
-  userReservations: any[] = []; // Kullanıcının rezervasyonlarını tutacak array
+  userReservations: any[] = []; // Kullanıcının rezervasyonları
+  isLoading = false;
 
   constructor(
     private modalController: ModalController,
@@ -29,13 +30,7 @@ export class RezervasyonPage implements OnInit {
   async ngOnInit() {
     this.dateService.setSelectedDate(this.selectedDate);
     this.kortService.loadSlotsForDate(this.selectedDate);
-    
-    // Kullanıcının rezervasyonlarını yükle
-    try {
-      this.userReservations = await this.reservationService.getUserReservations();
-    } catch (error) {
-      console.error('Rezervasyonlar yüklenirken hata:', error);
-    }
+    await this.loadUserReservations(); // Rezervasyonları yükle
   }
 
   async openReservationModal(startTime: string, endTime: string) {
@@ -49,25 +44,19 @@ export class RezervasyonPage implements OnInit {
       }
     });
 
-    // Modal kapandığında
     modal.onDidDismiss().then(async (result) => {
       if (result.data) {
         try {
-          // Yeni rezervasyon oluştur
           await this.reservationService.createReservation({
             courtId: result.data.courtId,
             date: new Date(this.selectedDate),
             startTime: startTime,
             duration: result.data.duration
           });
-          
-          // Rezervasyon listesini güncelle
-          this.userReservations = await this.reservationService.getUserReservations();
-          
-          // Kort slotlarını yeniden yükle
-          this.kortService.loadSlotsForDate(this.selectedDate);
+          await this.loadUserReservations(); // Rezervasyonları yeniden yükle
+          this.kortService.loadSlotsForDate(this.selectedDate); // Kort durumunu güncelle
         } catch (error) {
-          console.error('Rezervasyon oluşturulurken hata:', error);
+          console.error('Rezervasyon oluşturma hatası:', error);
         }
       }
     });
@@ -78,12 +67,10 @@ export class RezervasyonPage implements OnInit {
   async cancelReservation(reservationId: string) {
     try {
       await this.reservationService.cancelReservation(reservationId);
-      // Rezervasyon listesini güncelle
-      this.userReservations = await this.reservationService.getUserReservations();
-      // Kort slotlarını yeniden yükle
-      this.kortService.loadSlotsForDate(this.selectedDate);
+      await this.loadUserReservations(); // Rezervasyonları yeniden yükle
+      this.kortService.loadSlotsForDate(this.selectedDate); // Kort durumunu güncelle
     } catch (error) {
-      console.error('Rezervasyon iptal edilirken hata:', error);
+      console.error('Rezervasyon iptal hatası:', error);
     }
   }
 
@@ -102,19 +89,21 @@ export class RezervasyonPage implements OnInit {
 
     this.updateDateService();
     this.kortService.loadSlotsForDate(this.selectedDate);
-    // Seçilen tarihe göre rezervasyonları güncelle
-    this.loadReservationsForDate();
+    this.loadUserReservations(); // Seçilen tarihe göre rezervasyonları güncelle
   }
 
   private updateDateService() {
     this.dateService.setSelectedDate(this.selectedDate);
   }
 
-  private async loadReservationsForDate() {
+  private async loadUserReservations() {
+    this.isLoading = true;
     try {
       this.userReservations = await this.reservationService.getUserReservations();
     } catch (error) {
       console.error('Rezervasyonlar yüklenirken hata:', error);
+    } finally {
+      this.isLoading = false;
     }
   }
 }
