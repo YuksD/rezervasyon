@@ -1,0 +1,29 @@
+@import 'src/styles/variables'; // Değişkenlerin tanımlandığı dosyayı import edin
+
+.custom-button {
+
+  border: 2px solid $dark-border;  /* Mavi bir çerçeve */
+  border-radius: $border-radius-large;        /* Köşeleri yuvarlak yapmak için */
+  padding: 10px 20px;         /* Yatay ve dikey boşluklar */
+  color: $dark-text;             /* Metin rengini çerçeveyle uyumlu yap */
+  font-size: 16px;            /* Metin boyutu */
+  font-weight: bold;          /* Kalın yazı */
+  cursor: pointer;            /* Tıklanabilir olduğunu göstermek için el işareti */
+  transition: background-color 0.3s ease; /* Arka plan renginin yumuşak geçişi */
+
+  &:hover {
+    background-color: $primary-color;  /* Üzerine gelindiğinde arka plan rengini mavi yap */
+    color: $dark-text;            /* Metin rengini beyaz yap */
+  }
+
+  &:active {
+    background-color: $primary-color-accent; /* Tıklandığında daha koyu mavi yap */
+    border-color: $dark-border;     /* Çerçeve rengini de değiştirelim */
+  }
+  .orange-button{
+    background-color: $primary-color;  /* turuncu arka plan rengi */
+    }
+  .white-button{
+    background-color: $light-color;  /* Açık arka plan rengi */
+    }
+}

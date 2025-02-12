@@ -1,0 +1,36 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>      
+    <ion-title>Profil</ion-title>
+    <ion-button size="small" shape="round" fill="clear" routerLink="/anasayfa" slot="start">
+      <ion-icon slot="icon-only" name="home-outline"></ion-icon>
+    </ion-button>
+    <ion-button size="small" shape="round" fill="clear" routerLink="/giris" slot="end">
+      <ion-icon slot="icon-only" name="person-outline"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content [fullscreen]="true">
+
+  <app-avatar></app-avatar>
+
+  <app-profile-info [profil]="profil"></app-profile-info>
+
+
+
+  <!-- profil fotoğrafı değiştirme butonu -->
+  <app-custom-button
+  [buttonText]="'Değiştir'" 
+  (buttonClick)="onChangePhoto()">
+  </app-custom-button>
+
+  <!-- şifre değiştirme butonu -->
+  <app-custom-button
+    [buttonText]="'Şifreyi Değiştir'"
+    (buttonClick)="onChangePassword()">
+  </app-custom-button>
+  <app-achievements [achievements]="profil.achievements"></app-achievements>
+
+</ion-content>

@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="overflowed">{{ selectedDate | date:'dd MMMM yyyy' }}</ion-title> <!-- Tarih bilgisi -->
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <!-- Başlangıç ve Bitiş Saatleri -->
+    <ion-row>
+      <ion-col size="2" class="ion-text-center">
+        <ion-icon name="accessibility-outline"></ion-icon>
+      </ion-col>
+      <ion-col size="8" class="ion-text-center">
+        {{ startTime }} - {{ endTime }} <!-- Başlangıç ve bitiş saatleri dinamik -->
+      </ion-col>
+      <ion-col size="2" class="ion-text-center">
+        <ion-icon name="flag-outline"></ion-icon>
+      </ion-col>
+    </ion-row>
+
+    <!-- Süre Seçim Butonları -->
+    <ion-radio-group
+      [allowEmptySelection]="true"
+      [(ngModel)]="selectedDuration"
+      (ionChange)="updateEndTime()"
+    >
+      <ion-row>
+        <ion-col size="4" class="ion-text-center">
+          <ion-item lines="none">
+            <ion-label class="text-size">30 Dakika</ion-label>
+            <ion-radio aria-label="Primary" color="primary" slot="start" value="30"></ion-radio>
+          </ion-item>
+        </ion-col>
+        <ion-col size="4" class="ion-text-center">
+          <ion-item lines="none">
+            <ion-label class="text-size">60 Dakika</ion-label>
+            <ion-radio slot="start" value="60"></ion-radio>
+          </ion-item>
+        </ion-col>
+        <ion-col size="4" class="ion-text-center">
+          <ion-item lines="none">
+            <ion-label class="text-size">90 Dakika</ion-label>
+            <ion-radio slot="start" value="90"></ion-radio>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-radio-group>
+
+    <!-- Oyuncu Adı Girişi -->
+    <ion-row>
+      <ion-col size="12">
+        <ion-item lines="none">
+          <ion-label position="stacked">Sporcu Adı</ion-label>
+          <ion-input [(ngModel)]="playerName" placeholder="Adınızı girin"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <!-- Talep Et Butonu -->
+    <ion-row>
+      <ion-col size="12" class="ion-text-right">
+        <ion-button class="talep-button" (click)="reserve()">Talep Et</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

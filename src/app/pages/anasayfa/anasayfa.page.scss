@@ -1,0 +1,15 @@
+.anasayfa-content {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+.custom-box {
+    --color: rgb(0, 0, 0); 
+    --background: rgb(253, 234, 220);
+    height: 80px;
+    width: 150px;
+}

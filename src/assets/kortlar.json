@@ -1,0 +1,9 @@
+{
+    "kortlar": [
+      { "kort": 1, "startHour": 8, "endHour": 19 },
+      { "kort": 2, "startHour": 8, "endHour": 19 },
+      { "kort": 3, "startHour": 8, "endHour": 19 },
+      { "kort": 4, "startHour": 8, "endHour": 19 }
+    ]
+  }
+  

@@ -1,0 +1,39 @@
+.logo-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    height: 135px;
+}
+
+.logo {
+    width: 135px;
+    height: 135px;
+}
+
+.wellcome-message {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 1.2em;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.custom-textbox {
+    width: 300px;
+    margin: 10px;
+}
+
+.content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .error-message {
+    width: 250px;
+    justify-content: center;
+  }

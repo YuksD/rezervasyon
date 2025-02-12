@@ -1,0 +1,62 @@
+ion-content {
+    height: 300px;
+}
+
+.overflowed {
+    padding-inline-start: 60px;
+    padding-inline-end: 60px;
+}
+
+ion-input {
+    --padding-start: 12px;
+    --padding-end: 12px;
+    border-radius: 15px; 
+    border: 2px solid #ccc; 
+  }
+
+
+  ion-radio {
+    margin: 4px;
+    border: 2px solid #000; 
+    border-radius: 50%; 
+}
+
+ion-label {
+    width: 100%;
+    margin: 0px;
+}
+
+
+.text-size {
+    font-size: 0.8em;
+}
+
+.talep-button {
+    border-radius: 15px; /* Köşeleri yumuşatma */
+
+  }
+
+  .duration-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin: 10px 0;
+  
+    button {
+      padding: 10px;
+      border: 1px solid #ccc;
+      background-color: white;
+      cursor: pointer;
+      &.selected {
+        background-color: #4CAF50;
+        color: white;
+      }
+    }
+  }
+  .half-modal {
+    --width: 100%;
+    --height: 50%;  /* Yükseklik ekranın %50'si olacak şekilde ayarlanıyor */
+    --border-radius: 20px 20px 0 0;
+    --top: auto;
+    --bottom: 0;
+    position: absolute;
+  }

@@ -1,0 +1,25 @@
+div.logo{
+    margin: 8vh 0 8vh 0;
+    img {
+        height: 15vh;
+        
+    }
+}
+ion-card{
+    box-shadow: rgb(216, 208, 197) 0px 0px 25px 5px;
+    ion-input{
+        font-size: 1rem;
+        ion-icon{
+            font-size: 1.2rem;
+        }
+    }
+}
+
+ion-button{
+    text-transform: none;
+}
+login-btn{
+    ion-text{
+        font-size: 0.9rem;
+    }
+}

@@ -1,0 +1,36 @@
+div.logo{
+    margin: 10vh 0 5vh 0;
+    img {
+        height: 25vh;
+        
+    }
+}
+ion-card{
+    box-shadow: rgb(216, 208, 197) 0px 0px 25px 5px;
+    ion-input{
+        font-size: 1rem;
+        ion-icon{
+            font-size: 1.2rem;
+        }
+    }
+}
+
+ion-button{
+    text-transform: none;
+}
+login-btn{
+    ion-text{
+        font-size: 0.9rem;
+    }
+}
+
+div.signup {
+    margin-top: 5vh;
+    ion-text{
+        font-size: 0.9rem;
+    vertical-align: -webkit-baseline-middle;
+    }
+    ion-button{
+        --padding-start: 0.2rem;
+    }
+}

@@ -1,0 +1,35 @@
+.custom-box {
+  border-radius: 45px;
+  width: 300px;
+  padding: 0px;
+  margin: 5px;
+  border: 1px solid #000; /* İstediğiniz border rengini seçebilirsiniz */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* İsteğe bağlı: Gölge ekler */
+}
+
+h3 {
+  text-align: center;
+}
+
+.gunun-maci-content {
+  padding: 0;
+}
+
+.align-center {
+  display: flex;
+  align-items: center;
+}
+
+.align-center p {
+  margin-left: 5px;
+  margin-bottom: 0; /* İsteğe bağlı: Metinlerin alt boşluğunu sıfırlar */
+}
+
+.flex-column {
+  flex-direction: column;
+  align-items: center;
+}
+
+.flex-column p {
+  margin: 0; /* İsteğe bağlı: Metinlerin boşluğunu sıfırlar */
+}

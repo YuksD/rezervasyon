@@ -1,0 +1,66 @@
+ion-item.slot-item {
+  --padding-start: 4px;
+  --padding-end: 4px;
+  --inner-padding-end: 6px;
+  --background: #F9F8F6;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 1;
+  margin: 0;
+}
+
+/* Zaman etiketinin alanını ayarlayın */
+.time-label {
+  flex: 0 0 18%; /* Zaman etiketinin genişliği */
+  text-align: center; /* Saat metnini ortala */
+  color: white; /* Yazının iç rengi beyaz */
+  font-weight: 800; /* Yazıyı kalın yap */
+  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.660), /* Alt kenar */
+               -1px -1px 0px rgba(0, 0, 0, 0.660), /* Üst kenar */
+               1px -1px 0px rgba(0, 0, 0, 0.660), /* Sol üst kenar */
+               -1px 1px 0px rgba(0, 0, 0, 0.660), /* Sağ alt kenar */
+               0px 1px 0px rgba(0, 0, 0, 0.660), /* Alt kenar */
+               0px -1px 0px rgba(0, 0, 0, 0.660); /* Üst kenar */
+}
+
+/* Oyuncu isimleri için konteyner */
+.player-container {
+  flex: 1; /* Kalan alanı kaplar */
+  display: flex;
+  justify-content: center; /* İçeriği merkeze yasla */
+}
+
+/* Dolu slotların stili */
+.filled-slot {
+  background-color: #e99c7070; /* Dolu slotlar için turuncu arka plan */
+  border-radius: 15px; /* Kenar yuvarlaklığı */
+  padding: 10px; /* İçerik alanı */
+  color: black; /* Yazı rengi beyaz */
+  font-weight: 600;
+  width: 100%; /* Kutunun genişliğini tam ayarla */
+  box-sizing: border-box; /* Padding'in hesaplamaya dahil edilmesi için */
+  text-align: center; /* Metni ortala */
+  //box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.1); /* Gölge ekleme */
+  border: 1px solid white; /* Beyaz kenarlık ekleme */
+}
+
+/* Boş slotların stili */
+.empty-slot {
+  background-color: #dbdfe070; /* Boş slotlar için açık gri arka plan */
+  border-radius: 15px; /* Kenar yuvarlaklığı */
+  padding: 10px; /* İçerik alanı */
+  color: #0000007a; /* Yazı rengi siyah */
+  font-weight: 600;
+  width: 100%; /* Kutunun genişliğini tam ayarla */
+  box-sizing: border-box; /* Padding'in hesaplamaya dahil edilmesi için */
+  text-align: center; /* Metni ortala */
+  //box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.1); /* Gölge ekleme */
+  border: 1px solid white; /* Beyaz kenarlık ekleme */
+}
+
+/* Dolu slotları vurgulamak için */
+.disabled {
+  color: rgb(150, 150, 150);
+  cursor: not-allowed;
+}

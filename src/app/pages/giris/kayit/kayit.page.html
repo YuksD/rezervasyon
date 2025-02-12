@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Kayıt Ol</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="register()">
+    <ion-item>
+      <ion-label position="floating">Telefon Numarası</ion-label>
+      <ion-input type="tel" [(ngModel)]="user.phoneNumber" name="phoneNumber" required></ion-input>
+    </ion-item>
+    <ion-text color="danger" *ngIf="phoneNumberInvalid">
+      <p>Telefon numarası geçersiz. Lütfen 10 haneli bir numara girin.</p>
+    </ion-text>
+
+    <ion-item>
+      <ion-label position="floating">Şifre</ion-label>
+      <ion-input type="password" [(ngModel)]="user.password" name="password" required></ion-input>
+    </ion-item>
+    <ion-text color="danger" *ngIf="passwordInvalid">
+      <p>Şifre en az 8 karakter olmalıdır.</p>
+    </ion-text>
+
+    <ion-item>
+      <ion-label position="floating">Şifre Onay</ion-label>
+      <ion-input type="password" [(ngModel)]="confirmPassword" name="confirmPassword" required></ion-input>
+    </ion-item>
+    <ion-text color="danger" *ngIf="confirmPasswordInvalid">
+      <p>Şifreler eşleşmiyor.</p>
+    </ion-text>
+
+    <ion-item>
+      <ion-label position="floating">Ad</ion-label>
+      <ion-input type="text" [(ngModel)]="user.firstName" name="firstName" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Soyad</ion-label>
+      <ion-input type="text" [(ngModel)]="user.lastName" name="lastName" required></ion-input>
+    </ion-item>
+
+    <ion-button expand="full" type="submit">Kayıt Ol</ion-button>
+  </form>
+</ion-content>

@@ -1,0 +1,44 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>      
+      <ion-title>Ana Sayfa</ion-title>
+      <ion-button size="small" shape="round" fill="clear" routerLink="/profil" slot="end">
+        <ion-icon slot="icon-only" name="person-outline"></ion-icon>
+      </ion-button>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content  [fullscreen]="true">
+  <ion-grid class="anasayfa-content">
+    <ion-row>
+      <app-gunun-maci></app-gunun-maci>
+    </ion-row>
+    <ion-row>
+      <ion-col size="6">
+        <ion-button class="custom-box" routerLink="/rezervasyon"> REZERVASYON</ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button class="custom-box" routerLink="/rezervasyon"> GALERİ</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="6">
+        <ion-button class="custom-box" routerLink="/rezervasyon"> LİG</ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button class="custom-box" routerLink="/rezervasyon"> ETKİNLİKLER</ion-button>
+      </ion-col>
+    </ion-row>  <ion-row>
+      <ion-col size="6">
+        <ion-button class="custom-box" routerLink="/rezervasyon"> DUYURULAR</ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button class="custom-box" routerLink="/rezervasyon"> DERGİ</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-button class="custom-box" routerLink="/rezervasyon"> ALASIM VAR</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,8 @@
+<div class="achievements">
+  <h2>Başarılar</h2>
+  <ul>
+    <li *ngFor="let achievement of achievements">
+      <strong>{{ achievement.date }} {{ achievement.event }}</strong> - {{ achievement.position }} 
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,28 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Giriş</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="content-container">
+    <div class="logo-container">
+      <img src="assets/image/aftek_logo.png" alt="Logo" class="logo">
+    </div>
+    <h2 class="wellcome-message">AFRODİT TENİS KULÜBÜNE<br>HOŞGELDİNİZ</h2>
+
+    <ion-item *ngIf="errorMessage">
+      <ion-label class="error-message" color="danger">{{ errorMessage }}</ion-label>
+    </ion-item>
+    
+    <ion-input class="custom-textbox" label="Tel No" label-placement="floating" fill="outline" placeholder="(5__) ___ __ __" [(ngModel)]="username"></ion-input>
+    <ion-input class="custom-textbox" label="Şifre" label-placement="floating" fill="outline" placeholder="Şifrenizi Girin" type="password" [(ngModel)]="password"></ion-input>
+
+    <p>Şifremi Unuttum</p>
+    <ion-button (click)="login()">Giriş Yap</ion-button>
+    <ion-button routerLink="/anasayfa">Misafir Girişi</ion-button>
+    <ion-button size="large" shape="round" fill="clear" routerLink="/kayit" slot="end">Kayıt Ol</ion-button>
+    <p>Hesabınız yok mu?</p>
+    <p>WhatsApp İletişim Hattı</p>
+  </div>
+</ion-content>

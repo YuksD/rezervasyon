@@ -1,0 +1,105 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button size="small" shape="round" fill="clear" routerLink="/anasayfa" slot="start">
+      <ion-icon slot="icon-only" name="reorder-three-outline"></ion-icon>
+    </ion-button>
+    <ion-title>Rezervasyon</ion-title>
+    <ion-button size="small" shape="round" fill="clear" routerLink="/anasayfa" slot="end">
+      <ion-icon slot="icon-only" name="person-outline"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<div>
+  <ion-row>
+    <!-- <ion-col size="2">
+      <ion-button size="small" shape="round" fill="clear" (click)="oncekiGun()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-col> -->
+
+      <ion-col size="12">
+        <ion-datetime-button datetime="datetime"></ion-datetime-button>
+      </ion-col>
+
+
+    <!-- <ion-col size="2">
+      <ion-button size="small" shape="round" fill="clear" (click)="sonrakiGun()">
+        <ion-icon slot="icon-only" name="arrow-forward-outline"></ion-icon>
+      </ion-button>
+    </ion-col> -->
+  </ion-row>
+</div>
+<!-- 'Today' ve 'Tomorrow' butonları burada ekleniyor -->
+<ion-row>
+  <ion-col size="6">
+    <ion-button expand="full" 
+      class="day-selector" 
+      [ngClass]="{'selected': selectedDay === 'today', 'not-selected': selectedDay !== 'today'}"
+      (click)="setDate('today')">Bugün</ion-button>
+  </ion-col>
+  <ion-col size="6">
+    <ion-button expand="full" 
+      class="day-selector" 
+      [ngClass]="{'selected': selectedDay === 'tomorrow', 'not-selected': selectedDay !== 'tomorrow'}"
+      (click)="setDate('tomorrow')">Yarın</ion-button>
+  </ion-col>
+</ion-row>
+<div class="rectangle-container">
+  <div class="rectangle-content">
+    <!-- <ion-button class="rezervasyon-yap-button" id="open-modal" expand="block">Rezervasyon Yap</ion-button>
+    <ion-modal trigger="open-modal" [initialBreakpoint]="1" [breakpoints]="[0, 1]">
+      <ng-template>
+        <div class="block">
+          <app-rezervasyon-modal></app-rezervasyon-modal>
+        </div>
+      </ng-template>
+    </ion-modal> -->
+
+
+    <ion-modal [keepContentsMounted]="true">
+      <ng-template>
+        <ion-datetime
+    id="datetime"
+    presentation="date"
+    [(ngModel)]="selectedDate"
+    [formatOptions]="{
+        date: {
+            weekday: 'short',
+            month: 'long',
+            day: '2-digit'
+        },
+        time: {
+            hour: '2-digit',
+            minute: '2-digit'
+        }
+    }">
+</ion-datetime>
+      </ng-template>
+    </ion-modal>
+
+
+    <ion-content class="custom-colored-content">
+      <ion-tabs>
+        <ion-tab-bar class="custom-tab-bar" slot="top">
+          <ion-tab-button tab="genel" class="kort-button genel-tab" [ngClass]="{ 'selected': router.url.includes('genel'), 'not-selected': !router.url.includes('genel') }">
+            HEPSİ
+          </ion-tab-button>
+          <ion-tab-button tab="kort1" class="kort-button" [ngClass]="{ 'selected': router.url.includes('kort1'), 'not-selected': !router.url.includes('kort1') }">
+            K1
+          </ion-tab-button>
+          <ion-tab-button tab="kort2" class="kort-button" [ngClass]="{ 'selected': router.url.includes('kort2'), 'not-selected': !router.url.includes('kort2') }">
+            K2
+          </ion-tab-button>
+          <ion-tab-button tab="kort3" class="kort-button" [ngClass]="{ 'selected': router.url.includes('kort3'), 'not-selected': !router.url.includes('kort3') }">
+            K3
+          </ion-tab-button>
+          <ion-tab-button tab="kort4" class="kort-button" [ngClass]="{ 'selected': router.url.includes('kort4'), 'not-selected': !router.url.includes('kort4') }">
+            K4
+          </ion-tab-button>
+        </ion-tab-bar>
+      </ion-tabs>
+    </ion-content>
+    
+  </div>
+</div>

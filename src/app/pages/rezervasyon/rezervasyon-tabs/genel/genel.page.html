@@ -1,0 +1,30 @@
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let slot of timeSlots" class="slot-item" lines="none">
+      <ion-label class="time-label">{{ slot.time }}</ion-label>
+      <div class="badges">
+        <!-- <ion-badge [color]="slot.kort1 ? 'empty-slot' : 'filled-slot'">
+          {{ slot.kort1 ? 'Boş' : 'Dolu' }}
+        </ion-badge>
+        <ion-badge [color]="slot.kort2 ? 'empty-slot' : 'filled-slot'">
+          {{ slot.kort2 ? 'Boş' : 'Dolu' }}
+        </ion-badge>
+        <ion-badge [color]="slot.kort3 ? 'empty-slot' : 'filled-slot'">
+          {{ slot.kort3 ? 'Boş' : 'Dolu' }}
+        </ion-badge> -->
+        <span [ngClass]="{'filled-slot': !slot.kort1, 'empty-slot': slot.kort1}">
+          {{ slot.kort1 ? 'Boş' : 'Dolu' }}
+        </span>
+        <span [ngClass]="{'filled-slot': !slot.kort2, 'empty-slot': slot.kort2}">
+          {{ slot.kort2 ? 'Boş' : 'Dolu' }}
+        </span>
+        <span [ngClass]="{'filled-slot': !slot.kort3, 'empty-slot': slot.kort3}">
+          {{ slot.kort3 ? 'Boş' : 'Dolu' }}
+        </span>
+        <span [ngClass]="{'filled-slot': !slot.kort4, 'empty-slot': slot.kort4}">
+          {{ slot.kort4 ? 'Boş' : 'Dolu' }}
+        </span>
+      </div>
+    </ion-item>
+  </ion-list>
+</ion-content>
